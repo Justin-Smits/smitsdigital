@@ -112,6 +112,531 @@
                 white-space: nowrap;
             }
             body { padding-top: 65px; }
+
+            .btn, .btn-primary, .btn-outline, .btn-outline-white {
+        white-space: nowrap; /* Dit voorkomt de gestapelde tekst! */
+        padding: 10px 16px; /* Iets compacter dan op desktop */
+        font-size: 0.9rem;
+    }
+
+    /* Specifieke fix voor de knop in de header */
+    .header-right .btn-primary { 
+        padding: 6px 12px !important; 
+        font-size: 0.8rem !important;
+    }
+
+    /* Logo tekst en icoon net wat kleiner */
+    .logo-text { font-size: 1rem; }
+    .logo svg { width: 30px; height: 30px; }
+
+    /* Ruimte tussen logo en rechterkant verkleinen */
+    nav.container {
+        padding: 0 10px; /* Iets minder ruimte aan de zijkanten van je scherm */
+        gap: 5px;
+    }
+
+    /* Vlaggetjes een tikje kleiner */
+    .lang-switcher button {
+        font-size: 1.1rem;
+    }
+    .hero-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+        }
+            /* CSS voor de certificeringen in de footer */
+            .certifications {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                margin-bottom: 30px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .certifications img {
+                height: 40px; /* Maakt de certificaten klein */
+                width: auto;
+                object-fit: contain;
+                opacity: 0.8; /* Subtiel weggewerkt in de footer */
+                transition: all 0.3s ease;
+                filter: drop-shadow(0 0 1px white); /* Voeg een witte schaduw toe om de witte rand te camoufleren */
+                mix-blend-mode: multiply; /* Laat de witte achtergrond samensmelten met de footer-achtergrond */
+            }
+            .certifications img:hover {
+                transform: scale(1.05); /* Subtiel zoom-effect als je eroverheen muist */
+            }
+            
+            /* Zorg dat de footer tekst netjes onder de badges staat */
+            footer {
+                text-align: center;
+            }
+        </style>
+    <body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="55" r="35" stroke="#007bff" stroke-width="4"/>
+                    <rect x="25" y="45" width="50" height="22" rx="11" fill="#1e293b"/>
+                    <circle cx="38" cy="56" r="4" fill="#00d4ff"/>
+                    <circle cx="62" cy="56" r="4" fill="#00d4ff"/>
+                    <rect x="22" y="32" width="8" height="8" fill="#007bff" rx="1"/>
+                    <rect x="34" y="24" width="8" height="8" fill="#007bff" rx="1"/>
+                    <rect x="15" y="42" width="6" height="6" fill="#007bff" rx="1"/>
+                    <rect x="42" y="18" width="10" height="10" fill="#007bff" rx="1"/>
+                </svg>
+                <span class="logo-text">Smits<span>Digital</span></span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#diensten" data-i18n="nav-diensten">Diensten</a></li>
+                <li><a href="#werkwijze" data-i18n="nav-werkwijze">Werkwijze</a></li>
+                <li><a href="#prijzen" data-i18n="nav-tarieven">Tarieven</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+            </ul>
+
+            <div class="header-right">
+                <a href="#contact" class="btn btn-primary" data-i18n="btn-gesprek">Gesprek inplannen</a>
+                <div class="lang-switcher">
+    <button onclick="changeLanguage('nl')" id="btn-nl">🇳🇱</button>
+    <button onclick="changeLanguage('en')" id="btn-en" class="active">🇬🇧</button> <button onclick="changeLanguage('es')" id="btn-es">🇪🇸</button>
+</div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero hero-with-background">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content-center">
+            <span class="badge" data-i18n="hero-badge">Websites & AI Automatisering</span>
+            <h1 data-i18n="hero-title">Ik bouw de digitale motor achter jouw succes.</h1>
+            <p data-i18n="hero-p">Van high-end websites tot slimme AI Agents binnen Microsoft. Ik combineer techniek met visuele kracht om jouw bedrijf te laten groeien.</p>
+            <div class="hero-btns">
+                <a href="#prijzen" class="btn btn-primary" data-i18n="btn-aanbiedingen">Bekijk aanbiedingen</a>
+                <a href="#werkwijze" class="btn btn-outline-white" data-i18n="btn-aanpak">Mijn aanpak</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="diensten" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="werk-h2">Wat ik precies voor je doe</h2>
+                <p data-i18n="werk-p">Ik help ondernemers die klaar zijn voor de volgende stap in digitalisering.</p>
+            </div>
+            <div class="work-grid">
+                <div class="work-item">
+                    <div class="icon">🌐</div>
+                    <h3 data-i18n="werk-1-h3">Maatwerk Websites</h3>
+                    <p data-i18n="werk-1-p">Ik bouw niet zomaar een site, maar een online visitekaartje dat klanten overtuigt. Snel, veilig en volledig geoptimaliseerd voor Google (SEO).</p>
+                </div>
+                <div class="work-item">
+                    <div class="icon">🤖</div>
+                    <h3 data-i18n="werk-2-h3">Microsoft AI & Automation</h3>
+                    <p data-i18n="werk-2-p">Ik maak jouw werkdag makkelijker door AI Agents te bouwen in Copilot Studio en workflows te automatiseren in Power Automate.</p>
+                </div>
+                <div class="work-item">
+                    <div class="icon">📸</div>
+                    <h3 data-i18n="werk-3-h3">Drone & Media Opties</h3>
+                    <p data-i18n="werk-3-p">Een website komt pas echt tot leven met eigen beeldmateriaal. Indien gewenst kom ik langs met mijn drone voor unieke beelden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="werkwijze" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="step-h2">Mijn Werkwijze</h2>
+                <p data-i18n="step-p">In vier heldere stappen naar een digitaal resultaat dat voor je werkt.</p>
+            </div>
+            <div class="step-grid">
+                <div class="step-item">
+                    <div class="step-num">01</div>
+                    <h3 data-i18n="step-1-h3">Kennismaken</h3>
+                    <p data-i18n="step-1-p">Wat is er nodig? Wat is het doel? Vrijblijvend gesprek om te kijken of er een klik is.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">02</div>
+                    <h3 data-i18n="step-2-h3">Voorstel</h3>
+                    <p data-i18n="step-2-p">Een duidelijk plan van aanpak met een vaste investering. Zo kom je nooit voor verrassingen te staan.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">03</div>
+                    <h3 data-i18n="step-3-h3">Bouwen</h3>
+                    <p data-i18n="step-3-p">Van strategie naar design naar techniek. Ik realiseer jouw project gemiddeld in 6-12 weken.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">04</div>
+                    <h3 data-i18n="step-4-h3">Doorgroeien</h3>
+                    <p data-i18n="step-4-p">Een website online is pas het begin. We blijven monitoren, optimaliseren en ontwikkelen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prijzen" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="prijs-h2">Scherpe Tarieven</h2>
+                <p data-i18n="prijs-p">Transparante prijzen voor webontwikkeling en slimme AI-oplossingen.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3 data-i18n="prijs-1-h3">Basic Website</h3>
+                    <div class="price">€899<span data-i18n="prijs-1-btw">ex. BTW</span></div>
+                    <ul>
+                        <li data-i18n="prijs-1-li1">Modern & Responsive Design</li>
+                        <li data-i18n="prijs-1-li2">SEO Basis optimalisatie</li>
+                        <li data-i18n="prijs-1-li3">Contactformulier integratie</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" data-i18n="prijs-1-btn">Kies dit pakket</a>
+                </div>
+                <div class="price-card featured">
+                    <div class="popular-tag" data-i18n="prijs-2-tag">Meest gekozen</div>
+                    <h3 data-i18n="prijs-2-h3">AI & Automation</h3>
+                    <div class="price">€60<span data-i18n="prijs-2-btw">per uur</span></div>
+                    <ul>
+                        <li data-i18n="prijs-2-li1">Consultancy & Strategie</li>
+                        <li data-i18n="prijs-2-li2">Copilot Studio & AI Agents</li>
+                        <li data-i18n="prijs-2-li3">Power Automate Workflows</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" data-i18n="prijs-2-btn">Start Consultancy</a>
+                </div>
+                <div class="price-card">
+                    <h3 data-i18n="prijs-3-h3">Extra's</h3>
+                    <div class="price" data-i18n="prijs-3-price">Vanaf €100</div>
+                    <ul>
+                        <li data-i18n="prijs-3-li1">Drone Video opnames</li>
+                        <li data-i18n="prijs-3-li2">Professionele Fotografie</li>
+                        <li data-i18n="prijs-3-li3">Maatwerkkoppelingen</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" data-i18n="prijs-3-btn">Offerte aanvragen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <div class="contact-box">
+                <div class="section-header">
+                    <h2 data-i18n="contact-h2">Contact</h2>
+                    <p data-i18n="contact-p">Vul het formulier in en ik neem binnen 24 uur contact op.</p>
+                </div>
+                <form action="https://formsubmit.co/justinnoahsmits@gmail.com" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label data-i18n="contact-label-naam">Naam</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="contact-label-email">E-mailadres</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="contact-label-bericht">Bericht</label>
+                        <textarea name="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full" data-i18n="contact-btn">Verstuur Aanvraag</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            
+            <div class="certifications">
+               <img src="img/azure-ai-engineer.png" alt="Microsoft Certified: Azure AI Engineer Associate">
+            <img src="img/power-platform-functional.png" alt="Microsoft Certified: Power Platform Functional Consultant">
+            <img src="img/power-platform-architect.png" alt="Microsoft Certified: Power Platform Solution Architect">
+            <img src="img/ai-transformation-leader.png" alt="Microsoft Certified: AI Transformation Leader">
+            <img src="img/ai-business-professional.png" alt="Microsoft Certified: AI Business Professional">
+            <img src="img/copilot-agent-admin.png" alt="Microsoft 365 Certified: Copilot and Agent Administration">
+            <img src="img/azure-ai-fundamentals.png" alt="Microsoft Certified: Azure AI Fundamentals">
+            <img src="img/power-platform-fundamentals.png" alt="Microsoft Certified: Power Platform Fundamentals">
+         </div>
+            <p>&copy; 2026 Smits Digital | Justin Smits | <a href="https://www.linkedin.com/in/jnsmits/" target="_blank">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+const translations = {
+    nl: {
+        "nav-diensten": "Diensten",
+        "nav-werkwijze": "Werkwijze",
+        "nav-tarieven": "Tarieven",
+        "nav-contact": "Contact",
+        "btn-gesprek": "Gesprek inplannen",
+        "hero-badge": "Websites & AI Automatisering",
+        "hero-title": "Ik bouw de digitale motor achter jouw succes.",
+        "hero-p": "Van high-end websites tot slimme AI Agents binnen Microsoft. Ik combineer techniek met visuele kracht om jouw bedrijf te laten groeien.",
+        "btn-aanbiedingen": "Bekijk aanbiedingen",
+        "btn-aanpak": "Mijn aanpak",
+        "werk-h2": "Wat ik precies voor je doe",
+        "werk-p": "Ik help ondernemers die klaar zijn voor de volgende stap in digitalisering.",
+        "werk-1-h3": "Maatwerk Websites",
+        "werk-1-p": "Ik bouw niet zomaar een site, maar een online visitekaartje dat klanten overtuigt. Snel, veilig en volledig geoptimaliseerd voor Google (SEO).",
+        "werk-2-h3": "Microsoft AI & Automation",
+        "werk-2-p": "Ik maak jouw werkdag makkelijker door AI Agents te bouwen in Copilot Studio en workflows te automatiseren in Power Automate.",
+        "werk-3-h3": "Drone & Media Opties",
+        "werk-3-p": "Een website komt pas echt tot leven met eigen beeldmateriaal. Indien gewenst kom ik langs met mijn drone voor unieke beelden.",
+        "step-h2": "Mijn Werkwijze",
+        "step-p": "In vier heldere stappen naar een digitaal resultaat dat voor je werkt.",
+        "step-1-h3": "Kennismaken",
+        "step-1-p": "Wat is er nodig? Wat is het doel? Vrijblijvend gesprek om te kijken of er een klik is.",
+        "step-2-h3": "Voorstel",
+        "step-2-p": "Een duidelijk plan van aanpak met een vaste investering. Zo kom je nooit voor verrassingen te staan.",
+        "step-3-h3": "Bouwen",
+        "step-3-p": "Van strategie naar design naar techniek. Ik realiseer jouw project gemiddeld in 6-12 weken.",
+        "step-4-h3": "Doorgroeien",
+        "step-4-p": "Een website online is pas het begin. We blijven monitoren, optimaliseren en ontwikkelen.",
+        "prijs-h2": "Scherpe Tarieven",
+        "prijs-p": "Transparante prijzen voor webontwikkeling en slimme AI-oplossingen.",
+        "prijs-1-h3": "Basic Website",
+        "prijs-1-btw": "ex. BTW",
+        "prijs-1-li1": "Modern & Responsive Design",
+        "prijs-1-li2": "SEO Basis optimalisatie",
+        "prijs-1-li3": "Contactformulier integratie",
+        "prijs-1-btn": "Kies dit pakket",
+        "prijs-2-tag": "Meest gekozen",
+        "prijs-2-h3": "AI & Automation",
+        "prijs-2-btw": "per uur",
+        "prijs-2-li1": "Consultancy & Strategie",
+        "prijs-2-li2": "Copilot Studio & AI Agents",
+        "prijs-2-li3": "Power Automate Workflows",
+        "prijs-2-btn": "Start Consultancy",
+        "prijs-3-h3": "Extra's",
+        "prijs-3-price": "Vanaf €100",
+        "prijs-3-li1": "Drone Video opnames",
+        "prijs-3-li2": "Professionele Fotografie",
+        "prijs-3-li3": "Maatwerkkoppelingen",
+        "prijs-3-btn": "Offerte aanvragen",
+        "contact-h2": "Contact",
+        "contact-p": "Vul het formulier in en ik neem binnen 24 uur contact op.",
+        "contact-label-naam": "Naam",
+        "contact-label-email": "E-mailadres",
+        "contact-label-bericht": "Bericht",
+        "contact-btn": "Verstuur Aanvraag"
+    },
+    en: {
+        "nav-diensten": "Services",
+        "nav-werkwijze": "Process",
+        "nav-tarieven": "Rates",
+        "nav-contact": "Contact",
+        "btn-gesprek": "Schedule a meeting",
+        "hero-badge": "Websites & AI Automation",
+        "hero-title": "I build the digital engine behind your success.",
+        "hero-p": "From high-end websites to smart AI Agents within Microsoft. I combine technology with visual power to grow your business.",
+        "btn-aanbiedingen": "View offers",
+        "btn-aanpak": "My approach",
+        "werk-h2": "Exactly what I do for you",
+        "werk-p": "I help entrepreneurs who are ready for the next step in digitalization.",
+        "werk-1-h3": "Custom Websites",
+        "werk-1-p": "I don't just build a site, but an online business card that convinces customers. Fast, secure and fully optimized for Google (SEO).",
+        "werk-2-h3": "Microsoft AI & Automation",
+        "werk-2-p": "I make your workday easier by building AI Agents in Copilot Studio and automating workflows in Power Automate.",
+        "werk-3-h3": "Drone & Media Options",
+        "werk-3-p": "A website really comes to life with your own visual material. If desired, I can visit with my drone for unique footage.",
+        "step-h2": "My Working Method",
+        "step-p": "In four clear steps to a digital result that works for you.",
+        "step-1-h3": "Introduction",
+        "step-1-p": "What is needed? What is the goal? A no-obligation conversation to see if there is a match.",
+        "step-2-h3": "Proposal",
+        "step-2-p": "A clear plan of action with a fixed investment. This way, you will never face surprises.",
+        "step-3-h3": "Building",
+        "step-3-p": "From strategy to design to technology. I realize your project on average in 6-12 weeks.",
+        "step-4-h3": "Growth",
+        "step-4-p": "A website going online is just the beginning. We continue to monitor, optimize, and develop.",
+        "prijs-h2": "Competitive Rates",
+        "prijs-p": "Transparent pricing for web development and smart AI solutions.",
+        "prijs-1-h3": "Basic Website",
+        "prijs-1-btw": "excl. VAT",
+        "prijs-1-li1": "Modern & Responsive Design",
+        "prijs-1-li2": "SEO Basic optimization",
+        "prijs-1-li3": "Contact form integration",
+        "prijs-1-btn": "Choose this package",
+        "prijs-2-tag": "Most popular",
+        "prijs-2-h3": "AI & Automation",
+        "prijs-2-btw": "per hour",
+        "prijs-2-li1": "Consultancy & Strategy",
+        "prijs-2-li2": "Copilot Studio & AI Agents",
+        "prijs-2-li3": "Power Automate Workflows",
+        "prijs-2-btn": "Start Consultancy",
+        "prijs-3-h3": "Extras",
+        "prijs-3-price": "From €100",
+        "prijs-3-li1": "Drone Video recordings",
+        "prijs-3-li2": "Professional Photography",
+        "prijs-3-li3": "Custom integrations",
+        "prijs-3-btn": "Request quote",
+        "contact-h2": "Contact",
+        "contact-p": "Fill out the form and I will contact you within 24 hours.",
+        "contact-label-naam": "Name",
+        "contact-label-email": "Email address",
+        "contact-label-bericht": "Message",
+        "contact-btn": "Send Request"
+    },
+    es: {
+        "nav-diensten": "Servicios",
+        "nav-werkwijze": "Método",
+        "nav-tarieven": "Tarifas",
+        "nav-contact": "Contacto",
+        "btn-gesprek": "Programar una reunión",
+        "hero-badge": "Sitios Web y Automatización de IA",
+        "hero-title": "Construyo el motor digital detrás de tu éxito.",
+        "hero-p": "Desde sitios web de alta gama hasta agentes de IA inteligentes dentro de Microsoft. Combino tecnología con fuerza visual para hacer crecer tu negocio.",
+        "btn-aanbiedingen": "Ver ofertas",
+        "btn-aanpak": "Mi enfoque",
+        "werk-h2": "Exactamente lo que hago por ti",
+        "werk-p": "Ayudo a emprendedores que están listos para el siguiente paso en la digitalización.",
+        "werk-1-h3": "Sitios Web a Medida",
+        "werk-1-p": "No construyo solo un sitio, sino una tarjeta de presentación en línea que convence a los clientes. Rápido, seguro y totalmente optimizado para Google (SEO).",
+        "werk-2-h3": "IA y Automatización de Microsoft",
+        "werk-2-p": "Facilito tu jornada laboral construyendo agentes de IA en Copilot Studio y automatizando flujos de trabajo en Power Automate.",
+        "werk-3-h3": "Opciones de Dron y Medios",
+        "werk-3-p": "Un sitio web cobra vida con material visual propio. Si lo deseas, puedo visitarte con mi dron para obtener tomas únicas.",
+        "step-h2": "Mi Método de Trabajo",
+        "step-p": "En cuatro pasos claros hacia un resultado digital que trabaje para ti.",
+        "step-1-h3": "Conocerse",
+        "step-1-p": "¿Qué se necesita? ¿Cuál es el objetivo? Conversación sin compromiso para ver si hay conexión.",
+        "step-2-h3": "Propuesta",
+        "step-2-p": "Un plan de acción claro con una inversión fija. Así, nunca te llevarás sorpresas.",
+        "step-3-h3": "Construcción",
+        "step-3-p": "De la estrategia al diseño y la tecnología. Realizo tu proyecto en un promedio de 6 a 12 semanas.",
+        "step-4-h3": "Seguir Creciendo",
+        "step-4-p": "Poner un sitio web en línea es solo el comienzo. Seguimos monitoreando, optimizando y desarrollando.",
+        "prijs-h2": "Tarifas Competitivas",
+        "prijs-p": "Precios transparentes para desarrollo web y soluciones de IA inteligentes.",
+        "prijs-1-h3": "Sitio Web Básico",
+        "prijs-1-btw": "sin IVA",
+        "prijs-1-li1": "Diseño Moderno y Responsivo",
+        "prijs-1-li2": "Optimización básica de SEO",
+        "prijs-1-li3": "Integración de formulario de contacto",
+        "prijs-1-btn": "Elegir este paquete",
+        "prijs-2-tag": "Más elegido",
+        "prijs-2-h3": "IA y Automatización",
+        "prijs-2-btw": "por hora",
+        "prijs-2-li1": "Consultoría y Estrategia",
+        "prijs-2-li2": "Copilot Studio y Agentes de IA",
+        "prijs-2-li3": "Flujos de Power Automate",
+        "prijs-2-btn": "Iniciar Consultoría",
+        "prijs-3-h3": "Extras",
+        "prijs-3-price": "Desde €100",
+        "prijs-3-li1": "Grabaciones de video con dron",
+        "prijs-3-li2": "Fotografía Profesional",
+        "prijs-3-li3": "Integraciones a medida",
+        "prijs-3-btn": "Solicitar presupuesto",
+        "contact-h2": "Contacto",
+        "contact-p": "Completa el formulario y me pondré en contacto contigo en un plazo de 24 horas.",
+        "contact-label-naam": "Nombre",
+        "contact-label-email": "Correo electrónico",
+        "contact-label-bericht": "Mensaje",
+        "contact-btn": "Enviar Solicitud"
+    }
+};
+
+function changeLanguage(lang) {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('btn-' + lang);
+    if (btn) btn.classList.add('active');
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerText = translations[lang][key];
+        }
+    });
+}
+
+// Standaardtaal instellen op Engels bij laden
+document.addEventListener('DOMContentLoaded', () => {
+    changeLanguage('en');
+});
+</script>
+    </body>
+    </html>    </head>
+    <style>
+        /* --- RESET & GLOBAL FIXES --- */
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* --- HEADER & NAVIGATION FIXES --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Voorkom dat content onder de header begint */
+        body { padding-top: 70px; }
+
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+        .logo-text span { color: #007bff; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a { text-decoration: none; color: #1e293b; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #007bff; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switcher { display: flex; gap: 4px; }
+        .lang-switcher button {
+            background: none; border: none; cursor: pointer; font-size: 1.3rem;
+            padding: 2px; opacity: 0.4; transition: 0.3s;
+        }
+        .lang-switcher button.active { opacity: 1; transform: scale(1.1); }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 850px) {
+            .nav-links { display: none; } /* Verberg links op mobiel voor ruimte */
+            .logo-text { font-size: 1.1rem; }
+            .btn-primary { 
+                padding: 8px 12px !important; 
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+            body { padding-top: 65px; }
         }
             /* CSS voor de certificeringen in de footer */
             .certifications {
