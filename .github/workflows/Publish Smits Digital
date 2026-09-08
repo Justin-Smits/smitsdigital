@@ -1,0 +1,142 @@
+name: Publish Smits Digital
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smits-digital-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Check Pages configuration
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pages } = await github.request('GET /repos/{owner}/{repo}/pages', context.repo);
+            if (pages.build_type !== 'workflow') {
+              core.setFailed('Open Settings > Pages > Build and deployment and set Source to GitHub Actions. Then run this workflow again.');
+            }
+
+      - name: Prepare static website
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s index.html
+          mkdir -p _site
+          cp index.html _site/index.html
+          for asset in img CNAME robots.txt sitemap.xml; do
+            if [ -e "$asset" ]; then
+              cp -R "$asset" _site/
+            fi
+          done
+          touch _site/.nojekyll
+
+      - name: Upload website package
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+          retention-days: 1
+
+      # Reuse the upload's artifact ID. Do not call the failing ListArtifacts endpoint.
+      # GitHub still validates the token, branch, environment and OIDC identity.
+      - name: Publish package and confirm deployment
+        id: deploy
+        uses: actions/github-script@v7
+        env:
+          PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+        with:
+          script: |
+            const artifactId = process.env.PAGES_ARTIFACT_ID;
+            if (!artifactId || !/^\d+$/.test(artifactId)) {
+              throw new Error('The upload did not return a valid artifact ID.');
+            }
+
+            const oidcToken = await core.getIDToken();
+            core.setSecret(oidcToken);
+            let deploymentId;
+            let complete = false;
+            try {
+              const { data } = await github.request(
+                'POST /repos/{owner}/{repo}/pages/deployments',
+                {
+                  ...context.repo,
+                  artifact_id: artifactId,
+                  pages_build_version: context.sha,
+                  oidc_token: oidcToken
+                }
+              );
+              deploymentId = data.id || data.status_url?.split('/').pop();
+              if (!deploymentId) throw new Error('GitHub did not return a deployment ID.');
+
+              core.setOutput('deployment_id', deploymentId);
+              core.info('Deployment created; waiting for GitHub to confirm publication.');
+              const deadline = Date.now() + 10 * 60 * 1000;
+              const failures = new Set([
+                'deployment_failed', 'deployment_content_failed',
+                'deployment_cancelled', 'deployment_lost'
+              ]);
+              while (Date.now() < deadline) {
+                await new Promise(resolve => setTimeout(resolve, 10000));
+                let status;
+                try {
+                  const response = await github.request(
+                    'GET /repos/{owner}/{repo}/pages/deployments/{deployment_id}',
+                    { ...context.repo, deployment_id: deploymentId }
+                  );
+                  status = response.data.status;
+                } catch (error) {
+                  if (error.status >= 500 || error.status === 429) {
+                    core.warning('Temporary error while checking deployment status; retrying.');
+                    continue;
+                  }
+                  throw error;
+                }
+                core.info('Pages status: ' + status);
+                if (status === 'succeed') {
+                  complete = true;
+                  if (data.page_url) core.setOutput('page_url', data.page_url);
+                  core.info('GitHub confirmed that the website was published.');
+                  return;
+                }
+                if (failures.has(status)) {
+                  complete = true;
+                  throw new Error('GitHub Pages reported: ' + status);
+                }
+              }
+              throw new Error('GitHub did not confirm publication within 10 minutes.');
+            } catch (error) {
+              // Print only the message, never request headers or the OIDC payload.
+              core.setFailed('Publication failed: ' + error.message);
+            } finally {
+              if (deploymentId && !complete) {
+                try {
+                  await github.request(
+                    'POST /repos/{owner}/{repo}/pages/deployments/{deployment_id}/cancel',
+                    { ...context.repo, deployment_id: deploymentId }
+                  );
+                } catch {
+                  core.warning('Could not cancel the pending deployment. Check the Pages status in GitHub.');
+                }
+              }
+            }
+
